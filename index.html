@@ -1,1 +1,34 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Beer Calculator</title><style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#111;color:#fff;font:20px Arial}.calc{width:320px;padding:18px;background:#222;border-radius:18px}.screen{height:110px;background:#111;border-radius:10px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;overflow:hidden}.result{font-size:30px}.karaoke{display:none;width:100%;line-height:1.3}.karaoke.active{display:block}.prev{color:#555;font-size:11px}.current{font-size:18px;font-weight:bold;margin:5px 0}.next{color:#777;font-size:11px}.g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}button{height:58px;background:#444;color:#fff;border:0;border-radius:10px;font-size:19px;cursor:pointer;touch-action:manipulation}.eq{background:#1677ff}.c{background:#c22}</style></head><body><div class="calc"><div class="screen"><div id="result" class="result">0</div><div id="karaoke" class="karaoke"><div id="prev" class="prev"></div><div id="current" class="current"></div><div id="next" class="next"></div></div></div><div class="g" id="buttons"><button class="c" data-v="C">C</button><button data-v="DEL">DEL</button><button data-v="(">(</button><button data-v="/">÷</button><button data-v="7">7</button><button data-v="8">8</button><button data-v="9">9</button><button data-v="*">×</button><button data-v="4">4</button><button data-v="5">5</button><button data-v="6">6</button><button data-v="-">−</button><button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="+">+</button><button data-v="0">0</button><button data-v=".">.</button><button class="eq" data-v="=">=</button><button data-v=")">)</button></div></div><audio id="audio" src="./Beer.mp3" preload="metadata"></audio><script>const result=document.getElementById('result'),karaoke=document.getElementById('karaoke'),prev=document.getElementById('prev'),current=document.getElementById('current'),next=document.getElementById('next'),audio=document.getElementById('audio');let expr='';let started=false;const lines=["Nais kong magpakalasing","Dahil wala ka na","Nakatingin sa salamin","At nag-iisa","Nakatanim pa rin ang gumamel
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beer Calculator</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#111;color:#fff;font-family:Arial,sans-serif}.calc{width:min(340px,92vw);padding:18px;background:#222;border-radius:20px}.screen{height:105px;background:#0b0b0d;border-radius:12px;margin-bottom:12px;padding:10px;display:flex;align-items:center;justify-content:flex-end;overflow:hidden}.result{width:100%;font-size:32px;text-align:right;word-break:break-all}.karaoke{display:none;width:100%;text-align:center;line-height:1.3}.karaoke.active{display:block}.prev,.next{font-size:11px;color:#555}.current{font-size:17px;font-weight:bold;margin:5px 0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}button{height:58px;border:0;border-radius:11px;background:#444;color:#fff;font-size:19px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}.eq{background:#1677ff}.clear{background:#c22}button:active{transform:scale(.96)}</style>
+</head>
+<body>
+<div class="calc">
+<div class="screen"><div id="result" class="result">0</div><div id="karaoke" class="karaoke"><div id="prev" class="prev"></div><div id="current" class="current"></div><div id="next" class="next"></div></div></div>
+<div class="grid" id="grid">
+<button data-key="C" class="clear">C</button><button data-key="DEL">DEL</button><button data-key="(">(</button><button data-key="/">÷</button>
+<button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button><button data-key="*">×</button>
+<button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button><button data-key="-">−</button>
+<button data-key="1">1</button><button data-key="2">2</button><button data-key="3">3</button><button data-key="+">+</button>
+<button data-key="0">0</button><button data-key=".">.</button><button data-key="=" class="eq">=</button><button data-key=")">)</button>
+</div>
+</div>
+<audio id="audio" src="./Beer.mp3" preload="auto"></audio>
+<script>
+(function(){
+const result=document.getElementById('result');
+const karaoke=document.getElementById('karaoke');
+const prev=document.getElementById('prev');
+const current=document.getElementById('current');
+const next=document.getElementById('next');
+const audio=document.getElementById('audio');
+let expr='';
+let karaokeMode=false;
+const lines=[
+'Nais kong magpakalasing','Dahil wala ka na','Nakatingin sa salamin','At nag-iisa',
+"Nakatanim pa rin ang gum
